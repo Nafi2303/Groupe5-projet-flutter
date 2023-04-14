@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/boutton.dart';
+
 class Signup extends StatelessWidget {
   const Signup({super.key});
 
@@ -55,6 +57,25 @@ class Signup extends StatelessWidget {
             buton(
               onTap: connexion,
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "If you already have an account?",
+                  style: TextStyle(fontSize: 16),
+                ),
+                Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 17,
+                  ),
+                )
+              ],
+            )
           ],
         ),
       )),
@@ -62,28 +83,6 @@ class Signup extends StatelessWidget {
   }
 
   connexion() {}
-}
-
-class Bouton extends StatelessWidget {
-  final String imagePath;
-  const Bouton({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.white,
-          ),
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.grey[200]),
-      child: Image.asset(
-        imagePath,
-        height: 40,
-      ),
-    );
-  }
 }
 
 class champDeSaisie extends StatelessWidget {
@@ -130,7 +129,7 @@ class buton extends StatelessWidget {
               color: Colors.black, borderRadius: BorderRadius.circular(8)),
           child: Center(
             child: Text(
-              'Se connecter',
+              'Sign up',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
