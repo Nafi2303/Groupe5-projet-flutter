@@ -7,8 +7,8 @@ import '../widgets/boutton.dart';
 import '../widgets/bouttonS.dart';
 import '../widgets/champDeSaisie.dart';
 
-class Signup extends StatelessWidget {
-  const Signup({super.key});
+class Login extends StatelessWidget {
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class Signup extends StatelessWidget {
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             Text(
-              "Sign up",
+              "Login",
               style: TextStyle(
                 fontSize: 35,
                 color: Colors.white,
@@ -76,11 +76,11 @@ class Signup extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "If you already have an account?",
+                  "If you don't have an account?",
                   style: TextStyle(fontSize: 16),
                 ),
                 Text(
-                  "Login",
+                  "SingnUp",
                   style: TextStyle(
                     color: Colors.blue,
                     fontSize: 17,
