@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:tp2/page/ajout_tache.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,21 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context){
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: 
-        Text('ceci est un tire'),
-        ),
-        body:Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('We are the dream team'),
-              ElevatedButton(onPressed: connexion, child: 
-              Text('Rjoignez-nous'))
-          ],),
-        ) 
-        
-      ),
+      home: PageAjout(),
     );
   }
 }
