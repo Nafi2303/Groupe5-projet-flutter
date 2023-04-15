@@ -1,15 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import '../widgets/boutton.dart';
 import '../widgets/bouttonS.dart';
 import '../widgets/champDeSaisie.dart';
 
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   const Signup({super.key});
 
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  final utilisateurControlleur = TextEditingController();
+  final mdpControlleur = TextEditingController();
+  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,12 +67,14 @@ class Signup extends StatelessWidget {
             SizedBox(height: 100),
             champDeSaisie(
               hintText: 'Nom d\'utilisateur',
+              controlleur: utilisateurControlleur,
               obscureText: false,
             ),
             SizedBox(height: 20),
             champDeSaisie(
               hintText: 'Mot de passe',
-              obscureText: false,
+              controlleur: mdpControlleur,
+              obscureText: true,
             ),
             SizedBox(height: 50),
             buton(
@@ -94,5 +105,15 @@ class Signup extends StatelessWidget {
     );
   }
 
-  connexion() {}
+  void connexion() async {
+    try {
+      await firebaseAuth.createUserWithEmailAndPassword(
+        email: utilisateurControlleur.text,
+        password: mdpControlleur.text,
+      );
+      print('nice');
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
 }

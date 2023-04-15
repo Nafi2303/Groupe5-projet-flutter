@@ -2,14 +2,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import '../widgets/boutton.dart';
 import '../widgets/bouttonS.dart';
 import '../widgets/champDeSaisie.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final utilisateurControlleur = TextEditingController();
+  final mdpControlleur = TextEditingController();
+  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,12 +66,14 @@ class Login extends StatelessWidget {
             SizedBox(height: 100),
             champDeSaisie(
               hintText: 'Nom d\'utilisateur',
+              controlleur: utilisateurControlleur,
               obscureText: false,
             ),
             SizedBox(height: 20),
             champDeSaisie(
               hintText: 'Mot de passe',
-              obscureText: false,
+              controlleur: mdpControlleur,
+              obscureText: true,
             ),
             SizedBox(height: 50),
             buton(
