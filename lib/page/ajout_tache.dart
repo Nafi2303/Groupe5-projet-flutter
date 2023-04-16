@@ -44,7 +44,9 @@ class _PageAjoutState extends State<PageAjout> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(height: 45),
             IconButton(
-              onPressed: null,
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Icon(
                 CupertinoIcons.arrow_left,
                 color: Colors.white,
