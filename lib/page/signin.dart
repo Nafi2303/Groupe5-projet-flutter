@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:tp2/page/home.dart';
 import 'package:tp2/page/signup.dart';
+import 'package:tp2/services/auth-service.dart';
 import '../composants/bouttounLogo.dart';
 import '../composants/bouttonLogin.dart';
 import '../composants/champDeSaisie.dart';
@@ -18,6 +19,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  Service authClass = Service();
   final utilisateurControlleur = TextEditingController();
   final mdpControlleur = TextEditingController();
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
@@ -28,13 +30,13 @@ class _LoginState extends State<Login> {
           child: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Color.fromARGB(255, 32, 105, 37),
+        color: Color.fromARGB(255, 28, 64, 115),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             Text(
-              "Login",
+              "Connexion",
               style: TextStyle(
                 fontSize: 35,
                 color: Colors.white,
@@ -45,7 +47,7 @@ class _LoginState extends State<Login> {
               height: 100,
             ),
             Text(
-              "Continue with",
+              "Continuer avec",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25,
@@ -60,10 +62,6 @@ class _LoginState extends State<Login> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Center(child: Bouton(imagePath: 'lib/images/search.png')),
-                SizedBox(
-                  width: 50,
-                ),
-                Center(child: Bouton(imagePath: 'lib/images/apple.png'))
               ],
             ),
             SizedBox(height: 100),
@@ -90,7 +88,7 @@ class _LoginState extends State<Login> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Text(
-                  "If you don't have an account?",
+                  "Pas encore de cmopte?",
                   style: TextStyle(fontSize: 16),
                 ),
                 InkWell(
@@ -101,7 +99,7 @@ class _LoginState extends State<Login> {
                         (route) => false);
                   },
                   child: Text(
-                    "SingnUp",
+                    "Iscription",
                     style: TextStyle(
                       color: Colors.blue,
                       fontSize: 17,
@@ -109,6 +107,15 @@ class _LoginState extends State<Login> {
                   ),
                 )
               ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              "Copyright@DreamTeam2023",
+              style: TextStyle(
+                  fontSize: 12,
+                  color: const Color.fromARGB(255, 255, 255, 255)),
             )
           ],
         ),
@@ -136,7 +143,8 @@ class _LoginState extends State<Login> {
           MaterialPageRoute(builder: (builder) => HomePage()),
           (route) => false);
     } on FirebaseException catch (e) {
-      print(e);
+      final snackbar = SnackBar(content: Text(e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
     }
   }
 }
