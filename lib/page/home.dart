@@ -99,25 +99,53 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: StreamBuilder(
-          stream: _stream,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return CircularProgressIndicator();
-            }
-            return ListView.builder(
-              itemCount: snapshot.data?.docs.length,
-              itemBuilder: (context, index) {
-                return CardTache(
-                  libelleTache: 'Réveille',
-                  heure: '07h25',
-                  icon: Icons.alarm,
-                  couleurIcon: Colors.white,
-                  bgIcon: Colors.white,
-                  coche: false,
-                );
-              },
-            );
-          }),
+        stream: _stream,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return ListView.builder(
+            itemCount: snapshot.data?.docs.length,
+            itemBuilder: (context, index) {
+              Map<String, dynamic> tache =
+                  snapshot.data?.docs[index].data() as Map<String, dynamic>;
+              IconData icon;
+              Color couleurIcon;
+              switch (tache['categorie']) {
+                case 'Divertissement':
+                  icon = Icons.gamepad;
+                  couleurIcon = Colors.green;
+                  break;
+                case 'Travail':
+                  icon = Icons.business;
+                  couleurIcon = Color(0xffFB6E72);
+                  break;
+                case 'Etude':
+                  icon = Icons.menu_book;
+                  couleurIcon = Color(0xffEE973A);
+                  break;
+                case 'Famille':
+                  icon = Icons.people;
+                  couleurIcon = Color(0xff56D0DE);
+                  break;
+
+                default:
+                  icon = Icons.alarm;
+                  couleurIcon = Colors.black;
+                  break;
+              }
+              return CardTache(
+                libelleTache: tache['libelle'],
+                heure: '07h25',
+                icon: icon,
+                couleurIcon: couleurIcon,
+                bgIcon: Colors.white,
+                coche: false,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
