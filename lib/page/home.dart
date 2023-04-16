@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tp2/composants/cardTache.dart';
 import 'package:tp2/page/ajout_tache.dart';
@@ -10,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final Stream<QuerySnapshot> _stream =
+      FirebaseFirestore.instance.collection('Tache').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,72 +98,26 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              CardTache(
-                libelleTache: 'Réveille',
-                heure: '07h25',
-                icon: Icons.alarm,
-                couleurIcon: Colors.white,
-                bgIcon: Colors.white,
-                coche: false,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              CardTache(
-                libelleTache: 'Petit déjeuné',
-                heure: '8h00',
-                icon: Icons.coffee,
-                couleurIcon: Colors.white,
-                bgIcon: Colors.green,
-                coche: false,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              CardTache(
-                libelleTache: 'Transport',
-                heure: '08h15',
-                icon: Icons.bus_alert,
-                couleurIcon: Colors.white,
-                bgIcon: Colors.red,
-                coche: false,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              CardTache(
-                libelleTache: 'Travail',
-                heure: '09h00',
-                icon: Icons.business,
-                couleurIcon: Colors.white,
-                bgIcon: Colors.blueAccent,
-                coche: false,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              CardTache(
-                libelleTache: 'Déjeuné',
-                heure: '13h00',
-                icon: Icons.restaurant,
-                couleurIcon: Colors.white,
-                bgIcon: Colors.greenAccent,
-                coche: false,
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: StreamBuilder(
+          stream: _stream,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return CircularProgressIndicator();
+            }
+            return ListView.builder(
+              itemCount: snapshot.data?.docs.length,
+              itemBuilder: (context, index) {
+                return CardTache(
+                  libelleTache: 'Réveille',
+                  heure: '07h25',
+                  icon: Icons.alarm,
+                  couleurIcon: Colors.white,
+                  bgIcon: Colors.white,
+                  coche: false,
+                );
+              },
+            );
+          }),
     );
   }
 }
