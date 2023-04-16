@@ -1,13 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tp2/composants/button.dart';
 import 'package:tp2/composants/chipBox.dart';
 import 'package:tp2/composants/label.dart';
 import 'package:tp2/composants/textfield.dart';
-import 'package:tp2/composants/texteArea';
+import 'package:tp2/composants/texteArea.dart';
 
-class PageAjout extends StatelessWidget {
+class PageAjout extends StatefulWidget {
   PageAjout({super.key});
+
+  @override
+  State<PageAjout> createState() => _PageAjoutState();
+}
+
+class _PageAjoutState extends State<PageAjout> {
+  final _libelleControlleur = TextEditingController();
+  final _descriptionControlleur = TextEditingController();
+  String tachePriorite = "";
+  String tacheCategorie = "";
+
+  void _Ajouter() {
+    FirebaseFirestore.instance.collection('Tache').add({
+      'categorie': tacheCategorie,
+      'description': _descriptionControlleur.text,
+      'libelle': _libelleControlleur.text,
+      'priorite': tachePriorite
+    });
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +63,7 @@ class PageAjout extends StatelessWidget {
                     height: 15,
                   ),
                   Text(
-                    'Nouvelle tache',
+                    'Libéllé',
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.white,
@@ -52,9 +73,12 @@ class PageAjout extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
-                  label('Nom de la tache'),
+                  label('Libellé'),
                   SizedBox(height: 15),
-                  ChampDeSaisie(hintText: 'Nom de la tache'),
+                  ChampDeSaisie(
+                    hintText: 'Libellé de la tache',
+                    controlleur: _libelleControlleur,
+                  ),
                   SizedBox(
                     height: 40,
                   ),
@@ -64,15 +88,15 @@ class PageAjout extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      ChipData('Urgent', 0XffFF3336),
+                      priorite('Urgent', 0XffFF3336),
                       SizedBox(
                         width: 12,
                       ),
-                      ChipData('Important', 0xff2664fa),
+                      priorite('Important', 0xff2664fa),
                       SizedBox(
                         width: 12,
                       ),
-                      ChipData('Plannifié', 0xfff4127ae),
+                      priorite('Plannifié', 0xfff4127ae),
                     ],
                   ),
                   SizedBox(
@@ -84,13 +108,18 @@ class PageAjout extends StatelessWidget {
                   ),
                   TexteArea(
                     hintText: 'Description',
+                    controlleur: _descriptionControlleur,
                   ),
                   SizedBox(
                     height: 50,
                   ),
+                  label('Catégorie'),
+                  SizedBox(
+                    height: 12,
+                  ),
                   Row(
                     children: [
-                      ChipData('Divertissement', 0xff00FF00),
+                      categorie('Divertissement', 0xff00FF00),
                     ],
                   ),
                   SizedBox(
@@ -98,25 +127,85 @@ class PageAjout extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      ChipData('Travail', 0Xffff6d6e),
+                      categorie('Travail', 0Xffff6d6e),
                       SizedBox(
                         width: 12,
                       ),
-                      ChipData('Etude', 0xfff29732),
+                      categorie('Etude', 0xfff29732),
                       SizedBox(
                         width: 12,
                       ),
-                      ChipData('Famille', 0xff2bc8d9),
+                      categorie('Famille', 0xff2bc8d9),
                     ],
                   ),
                   SizedBox(
                     height: 50,
                   ),
-                  buton(onTap: null)
+                  buton(onTap: _Ajouter)
                 ],
               ),
             )
           ]),
+        ),
+      ),
+    );
+  }
+
+  Widget priorite(String label, int color) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          tachePriorite = label;
+        });
+      },
+      child: Chip(
+        backgroundColor: tachePriorite == label ? Colors.black : Color(color),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            10,
+          ),
+        ),
+        label: Text(
+          label,
+          style: TextStyle(
+            color: tachePriorite == label ? Colors.white : Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        labelPadding: EdgeInsets.symmetric(
+          horizontal: 17,
+          vertical: 3.8,
+        ),
+      ),
+    );
+  }
+
+  Widget categorie(String label, int color) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          tacheCategorie = label;
+        });
+      },
+      child: Chip(
+        backgroundColor: tacheCategorie == label ? Colors.black : Color(color),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            10,
+          ),
+        ),
+        label: Text(
+          label,
+          style: TextStyle(
+            color: tacheCategorie == label ? Colors.white : Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        labelPadding: EdgeInsets.symmetric(
+          horizontal: 17,
+          vertical: 3.8,
         ),
       ),
     );
