@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:tp2/page/home.dart';
-import '../composants/boutton.dart';
-import '../composants/buton log.dart';
+import '../composants/bouttounLogo.dart';
+import '../composants/bouttonLogin.dart';
 import '../composants/champDeSaisie.dart';
 
 class Login extends StatefulWidget {
@@ -86,6 +86,7 @@ class _LoginState extends State<Login> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Text(
                   "If you don't have an account?",
@@ -112,6 +113,7 @@ class _LoginState extends State<Login> {
           await firebaseAuth.signInWithEmailAndPassword(
               email: utilisateurControlleur.text,
               password: mdpControlleur.text);
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (builder) => Home()), (route) => false);
     } on FirebaseException catch (e) {

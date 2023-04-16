@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:tp2/page/signin.dart';
-import '../composants/boutton.dart';
-import '../composants/bouttonS.dart';
+import '../composants/bouttounLogo.dart';
+import '../composants/bouttonSignUp.dart';
 import '../composants/champDeSaisie.dart';
 import 'home.dart';
 
@@ -114,6 +114,7 @@ class _SignupState extends State<Signup> {
         email: utilisateurControlleur.text,
         password: mdpControlleur.text,
       );
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (builder) => Login()), (route) => false);
     } on FirebaseException catch (e) {
