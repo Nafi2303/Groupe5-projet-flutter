@@ -4,9 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import '../widgets/boutton.dart';
-import '../widgets/bouttonS.dart';
-import '../widgets/champDeSaisie.dart';
+import 'package:tp2/page/signin.dart';
+import '../composants/boutton.dart';
+import '../composants/bouttonS.dart';
+import '../composants/champDeSaisie.dart';
+import 'home.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -85,6 +87,7 @@ class _SignupState extends State<Signup> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Text(
                   "If you already have an account?",
@@ -111,7 +114,8 @@ class _SignupState extends State<Signup> {
         email: utilisateurControlleur.text,
         password: mdpControlleur.text,
       );
-      print('nice');
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (builder) => Login()), (route) => false);
     } on FirebaseException catch (e) {
       print(e);
     }

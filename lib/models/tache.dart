@@ -1,6 +1,6 @@
 class Tache {
-  String nom;
-  DateTime date;
+  String? nom;
+  DateTime? date;
   bool? isDone;
 
   Tache({

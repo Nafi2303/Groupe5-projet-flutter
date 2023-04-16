@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import '../widgets/boutton.dart';
-import '../widgets/bouttonS.dart';
-import '../widgets/champDeSaisie.dart';
+import 'package:tp2/page/home.dart';
+import '../composants/boutton.dart';
+import '../composants/buton log.dart';
+import '../composants/champDeSaisie.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -76,8 +78,8 @@ class _LoginState extends State<Login> {
               obscureText: true,
             ),
             SizedBox(height: 50),
-            buton(
-              onTap: connexion,
+            butonL(
+              onTap: connexionL,
             ),
             SizedBox(
               height: 20,
@@ -104,5 +106,16 @@ class _LoginState extends State<Login> {
     );
   }
 
-  connexion() {}
+  void connexionL() async {
+    try {
+      firebase_auth.UserCredential userCredential =
+          await firebaseAuth.signInWithEmailAndPassword(
+              email: utilisateurControlleur.text,
+              password: mdpControlleur.text);
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (builder) => Home()), (route) => false);
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
 }
