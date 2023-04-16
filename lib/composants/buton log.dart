@@ -16,7 +16,7 @@ class butonL extends StatelessWidget {
               color: Colors.black, borderRadius: BorderRadius.circular(8)),
           child: Center(
             child: Text(
-              'Sign up',
+              'Login',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
