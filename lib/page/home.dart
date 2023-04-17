@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tp2/composants/cardTache.dart';
 import 'package:tp2/page/ajout_tache.dart';
+import 'package:tp2/page/signin.dart';
+import 'package:tp2/services/auth-service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final Stream<QuerySnapshot> _stream =
       FirebaseFirestore.instance.collection('Tache').snapshots();
+  Service authClass = Service();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +37,17 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 25,
           ),
+          IconButton(
+              onPressed: () async {
+                await authClass.logOut();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (builder) => Login()),
+                    (route) => false);
+              },
+              icon: Icon(
+                Icons.logout,
+              ))
         ],
         bottom: PreferredSize(
           child: Align(

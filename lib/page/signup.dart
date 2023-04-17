@@ -28,13 +28,13 @@ class _SignupState extends State<Signup> {
           child: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Color.fromARGB(255, 32, 105, 37),
+        color: Color.fromARGB(255, 30, 119, 36),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             Text(
-              "Sign up",
+              "Inscription",
               style: TextStyle(
                 fontSize: 35,
                 color: Colors.white,
@@ -45,7 +45,7 @@ class _SignupState extends State<Signup> {
               height: 100,
             ),
             Text(
-              "Continue with",
+              "Continuer  avec",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25,
@@ -60,10 +60,6 @@ class _SignupState extends State<Signup> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Center(child: Bouton(imagePath: 'lib/images/search.png')),
-                SizedBox(
-                  width: 50,
-                ),
-                Center(child: Bouton(imagePath: 'lib/images/apple.png'))
               ],
             ),
             SizedBox(height: 100),
@@ -90,7 +86,7 @@ class _SignupState extends State<Signup> {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 Text(
-                  "If you already have an account?",
+                  "Vous avez déjà un compte?",
                   style: TextStyle(fontSize: 16),
                 ),
                 InkWell(
@@ -101,7 +97,7 @@ class _SignupState extends State<Signup> {
                         (route) => false);
                   },
                   child: Text(
-                    "Login",
+                    "Connexion",
                     style: TextStyle(
                       color: Colors.blue,
                       fontSize: 17,
@@ -109,6 +105,15 @@ class _SignupState extends State<Signup> {
                   ),
                 )
               ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              "Copyright@DreamTeam2023",
+              style: TextStyle(
+                  fontSize: 12,
+                  color: const Color.fromARGB(255, 255, 255, 255)),
             )
           ],
         ),
@@ -117,16 +122,28 @@ class _SignupState extends State<Signup> {
   }
 
   void connexion() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
         email: utilisateurControlleur.text,
         password: mdpControlleur.text,
       );
       // ignore: use_build_context_synchronously
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (builder) => Login()), (route) => false);
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (builder) => Login()),
+        (route) => false,
+      );
     } on FirebaseException catch (e) {
-      print(e);
+      final snackbar = SnackBar(content: Text(e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
     }
   }
 }
