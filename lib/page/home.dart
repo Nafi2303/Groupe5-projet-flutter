@@ -102,17 +102,46 @@ class _HomePageState extends State<HomePage> {
           stream: _stream,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
             return ListView.builder(
               itemCount: snapshot.data?.docs.length,
               itemBuilder: (context, index) {
+                Map<String, dynamic> tache =
+                    snapshot.data?.docs[index].data() as Map<String, dynamic>;
+                IconData icon;
+                Color couleurIcon;
+                switch (tache['categorie']) {
+                  case 'Divertissement':
+                    icon = Icons.movie;
+                    couleurIcon = Color(0xff35DA00);
+                    break;
+                  case 'Travail':
+                    icon = Icons.business;
+                    couleurIcon = Color(0xffFB6E72);
+                    break;
+
+                  case 'Etude':
+                    icon = Icons.school;
+                    couleurIcon = Color(0xffEE973A);
+                    break;
+
+                  case 'Famille':
+                    icon = Icons.people;
+                    couleurIcon = Color(0xff56D0DE);
+                    break;
+
+                  default:
+                    icon = Icons.task;
+                    couleurIcon = Color(0xffffffff);
+                    break;
+                }
                 return CardTache(
-                  libelleTache: 'Réveille',
+                  libelleTache: tache['libelle'],
                   heure: '07h25',
-                  icon: Icons.alarm,
+                  icon: icon,
                   couleurIcon: Colors.white,
-                  bgIcon: Colors.white,
+                  bgIcon: couleurIcon,
                   coche: false,
                 );
               },
