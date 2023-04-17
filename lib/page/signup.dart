@@ -45,7 +45,7 @@ class _SignupState extends State<Signup> {
               height: 100,
             ),
             Text(
-              "Continue avec",
+              "Continuer  avec",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 25,
@@ -136,8 +136,11 @@ class _SignupState extends State<Signup> {
         password: mdpControlleur.text,
       );
       // ignore: use_build_context_synchronously
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (builder) => Login()), (route) => false);
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (builder) => Login()),
+        (route) => false,
+      );
     } on FirebaseException catch (e) {
       final snackbar = SnackBar(content: Text(e.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackbar);

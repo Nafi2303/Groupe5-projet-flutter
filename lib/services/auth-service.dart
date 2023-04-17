@@ -51,7 +51,9 @@ class Service {
       value: userCredential.credential?.token.toString(),
     );
     await storage.write(
-        key: "userCresential", value: userCredential.toString());
+      key: "userCredential",
+      value: userCredential.toString(),
+    );
   }
 
   Future<String?> getToken() async {

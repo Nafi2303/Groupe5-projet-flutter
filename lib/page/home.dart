@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tp2/composants/cardTache.dart';
 import 'package:tp2/page/ajout_tache.dart';
+import 'package:tp2/page/signin.dart';
 import 'package:tp2/services/auth-service.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                 await authClass.logOut();
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (builder) => HomePage()),
+                    MaterialPageRoute(builder: (builder) => Login()),
                     (route) => false);
               },
               icon: Icon(

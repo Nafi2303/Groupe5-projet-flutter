@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   Service authClass = Service();
   @override
   void initState() {
+    checkLogin();
     super.initState();
   }
 

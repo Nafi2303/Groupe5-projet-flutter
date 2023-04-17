@@ -107,7 +107,7 @@ class _LoginState extends State<Login> {
                         (route) => false);
                   },
                   child: Text(
-                    "Iscription",
+                    "Inscription",
                     style: TextStyle(
                       color: Colors.blue,
                       fontSize: 17,
