@@ -93,6 +93,14 @@ class _LoginState extends State<Login> {
                 ),
                 InkWell(
                   onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                    );
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (builder) => Signup()),

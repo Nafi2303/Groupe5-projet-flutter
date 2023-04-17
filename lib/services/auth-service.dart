@@ -1,8 +1,5 @@
-import 'dart:html';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../page/home.dart';
@@ -50,12 +47,24 @@ class Service {
   Future<void> enregistrerUser(UserCredential userCredential) async {
     final storage = new FlutterSecureStorage();
     await storage.write(
-        key: "token", value: userCredential.credential?.token.toString());
+      key: "token",
+      value: userCredential.credential?.token.toString(),
+    );
     await storage.write(
         key: "userCresential", value: userCredential.toString());
   }
 
   Future<String?> getToken() async {
     return await storage.read(key: "token");
+  }
+
+  Future<void> logOut() async {
+    try {
+      await _googleSignIn.signOut();
+      await auth.signOut();
+      await storage.delete(key: "token");
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 }

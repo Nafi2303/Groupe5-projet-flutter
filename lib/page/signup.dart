@@ -122,6 +122,14 @@ class _SignupState extends State<Signup> {
   }
 
   void connexion() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
         email: utilisateurControlleur.text,
