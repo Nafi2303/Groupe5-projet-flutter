@@ -7,6 +7,9 @@ class CardTache extends StatelessWidget {
   final Color bgIcon;
   final String heure;
   final bool coche;
+  final Function? changementEtat;
+  final Function? onChanged;
+  final int index;
 
   const CardTache(
       {super.key,
@@ -15,7 +18,10 @@ class CardTache extends StatelessWidget {
       required this.couleurIcon,
       required this.heure,
       required this.bgIcon,
-      required this.coche});
+      required this.coche,
+      this.changementEtat,
+      required this.index,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +38,12 @@ class CardTache extends StatelessWidget {
                     5,
                   ),
                 ),
-                activeColor: Color(0xff000000),
-                checkColor: Color(0xff001452),
+                activeColor: Color(0xffffffff),
+                checkColor: Color(0xff000000),
                 value: coche,
-                onChanged: (bool? value) {},
+                onChanged: (bool? value) {
+                  changementEtat!(index);
+                },
               ),
             ),
             data: ThemeData(

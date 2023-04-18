@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tp2/composants/cardTache.dart';
 import 'package:tp2/page/ajout_tache.dart';
 import 'package:tp2/page/signin.dart';
@@ -16,7 +17,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final Stream<QuerySnapshot> _stream =
       FirebaseFirestore.instance.collection('Tache').snapshots();
+  List<Selectionner> selectionne = [];
   Service authClass = Service();
+  DateTime jour = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 22.0),
               child: Text(
-                'Samedi 15 avril',
+                DateFormat('dd/mm/yyyy').format(jour),
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
@@ -150,6 +154,8 @@ class _HomePageState extends State<HomePage> {
                     icon = Icons.task;
                     couleurIcon = Color(0xffffffff);
                 }
+                selectionne.add(Selectionner(
+                    id: snapshot.data!.docs[index].id, check: false));
                 return InkWell(
                   onTap: () {
                     Navigator.push(
@@ -168,7 +174,9 @@ class _HomePageState extends State<HomePage> {
                     icon: icon,
                     couleurIcon: Colors.white,
                     bgIcon: couleurIcon,
-                    coche: false,
+                    coche: selectionne[index].check,
+                    index: index,
+                    changementEtat: changementEtat,
                   ),
                 );
               },
@@ -176,4 +184,16 @@ class _HomePageState extends State<HomePage> {
           }),
     );
   }
+
+  void changementEtat(int index) {
+    setState(() {
+      selectionne[index].check = !selectionne[index].check;
+    });
+  }
+}
+
+class Selectionner {
+  String id;
+  bool check = false;
+  Selectionner({required this.id, required this.check});
 }

@@ -43,15 +43,27 @@ class _PageAjoutState extends State<PageAjout> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(height: 45),
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                CupertinoIcons.arrow_left,
-                color: Colors.white,
-                size: 26,
-              ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    CupertinoIcons.arrow_left,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                ),
+                Text(
+                  'Nouvelle tâche',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -63,14 +75,6 @@ class _PageAjoutState extends State<PageAjout> {
                 children: [
                   SizedBox(
                     height: 15,
-                  ),
-                  Text(
-                    'Nouvelle tâche',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
                   ),
                   SizedBox(
                     height: 40,
