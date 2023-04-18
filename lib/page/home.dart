@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tp2/composants/cardTache.dart';
 import 'package:tp2/page/ajout_tache.dart';
 import 'package:tp2/page/signin.dart';
+import 'package:tp2/page/tacheDetails.dart';
 import 'package:tp2/services/auth-service.dart';
 
 class HomePage extends StatefulWidget {
@@ -148,15 +149,27 @@ class _HomePageState extends State<HomePage> {
                   default:
                     icon = Icons.task;
                     couleurIcon = Color(0xffffffff);
-                    break;
                 }
-                return CardTache(
-                  libelleTache: tache['libelle'],
-                  heure: '14h00',
-                  icon: icon,
-                  couleurIcon: Colors.white,
-                  bgIcon: couleurIcon,
-                  coche: false,
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (builder) => TacheDetails(
+                          tache: tache,
+                          id: snapshot.data!.docs[index].id,
+                        ),
+                      ),
+                    );
+                  },
+                  child: CardTache(
+                    libelleTache: tache['libelle'],
+                    heure: '14h00',
+                    icon: icon,
+                    couleurIcon: Colors.white,
+                    bgIcon: couleurIcon,
+                    coche: false,
+                  ),
                 );
               },
             );

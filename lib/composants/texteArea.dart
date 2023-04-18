@@ -18,8 +18,8 @@ class TexteArea extends StatelessWidget {
       child: TextFormField(
         controller: controlleur,
         style: TextStyle(
-          color: Colors.grey,
-          fontSize: 17,
+          color: Colors.black,
+          fontSize: 22,
         ),
         maxLines: null,
         decoration: InputDecoration(

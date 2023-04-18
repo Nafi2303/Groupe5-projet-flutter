@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tp2/page/tacheDetails.dart';
 
-class ChampDeSaisie extends StatelessWidget {
+class ChampDeTexte extends StatelessWidget {
   final String hintText;
   final controlleur;
 
-  ChampDeSaisie({super.key, required this.hintText, required this.controlleur});
+  ChampDeTexte({super.key, required this.hintText, required this.controlleur});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class ChampDeSaisie extends StatelessWidget {
         controller: controlleur,
         style: TextStyle(
           color: Colors.black,
-          fontSize: 17,
+          fontSize: 20,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,

@@ -2,26 +2,41 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tp2/composants/button.dart';
+import 'package:tp2/composants/buttonUpdate.dart';
 import 'package:tp2/composants/chipBox.dart';
 import 'package:tp2/composants/label.dart';
 import 'package:tp2/composants/textfield.dart';
 import 'package:tp2/composants/texteArea.dart';
 
-class PageAjout extends StatefulWidget {
-  PageAjout({super.key});
+class TacheDetails extends StatefulWidget {
+  final Map<String, dynamic> tache;
+  final String id;
+
+  TacheDetails({super.key, required this.tache, required this.id});
 
   @override
-  State<PageAjout> createState() => _PageAjoutState();
+  State<TacheDetails> createState() => _TacheDetails();
 }
 
-class _PageAjoutState extends State<PageAjout> {
-  final _libelleControlleur = TextEditingController();
-  final _descriptionControlleur = TextEditingController();
-  String tachePriorite = "";
-  String tacheCategorie = "";
+class _TacheDetails extends State<TacheDetails> {
+  late TextEditingController _libelleControlleur;
+  late TextEditingController _descriptionControlleur;
+  late String tachePriorite;
+  late String tacheCategorie;
+  bool modifier = false;
 
-  void _Ajouter() {
-    FirebaseFirestore.instance.collection('Tache').add({
+  @override
+  void initState() {
+    _libelleControlleur = TextEditingController(text: widget.tache['libelle']);
+    _descriptionControlleur =
+        TextEditingController(text: widget.tache['description']);
+    tachePriorite = widget.tache['priorite'];
+    tacheCategorie = widget.tache['categorie'];
+    super.initState();
+  }
+
+  void _Modifier() {
+    FirebaseFirestore.instance.collection('Tache').doc(widget.id).update({
       'categorie': tacheCategorie,
       'description': _descriptionControlleur.text,
       'libelle': _libelleControlleur.text,
@@ -43,15 +58,52 @@ class _PageAjoutState extends State<PageAjout> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(height: 45),
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                CupertinoIcons.arrow_left,
-                color: Colors.white,
-                size: 26,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    CupertinoIcons.arrow_left,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        FirebaseFirestore.instance
+                            .collection('Tache')
+                            .doc(widget.id)
+                            .delete()
+                            .then((value) {
+                          Navigator.pop(context);
+                        });
+                      },
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                        size: 26,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          modifier = !modifier;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.edit,
+                        color: modifier ? Colors.blue : Colors.white,
+                        size: 26,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -65,7 +117,7 @@ class _PageAjoutState extends State<PageAjout> {
                     height: 15,
                   ),
                   Text(
-                    'Nouvelle tâche',
+                    modifier ? 'Modification tâche' : 'Details de la tache',
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.white,
@@ -78,7 +130,7 @@ class _PageAjoutState extends State<PageAjout> {
                   label('Libellé'),
                   SizedBox(height: 15),
                   ChampDeTexte(
-                    hintText: 'Libellé de la tâche',
+                    hintText: 'Libellé de la tache',
                     controlleur: _libelleControlleur,
                   ),
                   SizedBox(
@@ -143,7 +195,7 @@ class _PageAjoutState extends State<PageAjout> {
                   SizedBox(
                     height: 50,
                   ),
-                  buton(onTap: _Ajouter)
+                  modifier ? butonUpdate(onTap: _Modifier) : Container()
                 ],
               ),
             )
@@ -155,11 +207,13 @@ class _PageAjoutState extends State<PageAjout> {
 
   Widget priorite(String label, int color) {
     return InkWell(
-      onTap: () {
-        setState(() {
-          tachePriorite = label;
-        });
-      },
+      onTap: modifier
+          ? () {
+              setState(() {
+                tachePriorite = label;
+              });
+            }
+          : null,
       child: Chip(
         backgroundColor: tachePriorite == label ? Colors.black : Color(color),
         shape: RoundedRectangleBorder(
@@ -185,11 +239,13 @@ class _PageAjoutState extends State<PageAjout> {
 
   Widget categorie(String label, int color) {
     return InkWell(
-      onTap: () {
-        setState(() {
-          tacheCategorie = label;
-        });
-      },
+      onTap: modifier
+          ? () {
+              setState(() {
+                tacheCategorie = label;
+              });
+            }
+          : null,
       child: Chip(
         backgroundColor: tacheCategorie == label ? Colors.black : Color(color),
         shape: RoundedRectangleBorder(
