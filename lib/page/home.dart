@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.only(left: 22.0),
               child: Text(
-                DateFormat('dd/mm/yyyy').format(jour),
+                DateFormat('dd/MM/yyyy').format(jour),
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
