@@ -1,11 +1,15 @@
+// ignore_for_file: unused_element
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tp2/composants/button.dart';
 import 'package:tp2/composants/chipBox.dart';
+import 'package:tp2/composants/datePicker.dart';
 import 'package:tp2/composants/label.dart';
 import 'package:tp2/composants/textfield.dart';
 import 'package:tp2/composants/texteArea.dart';
+import 'package:intl/intl.dart';
 
 class PageAjout extends StatefulWidget {
   PageAjout({super.key});
@@ -16,10 +20,14 @@ class PageAjout extends StatefulWidget {
 
 class _PageAjoutState extends State<PageAjout> {
   final _libelleControlleur = TextEditingController();
+  final _dateDebutControl = TextEditingController();
+  final _dateFinControl = TextEditingController();
   final _descriptionControlleur = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
   String tachePriorite = "";
   String tacheCategorie = "";
-
+  DateTime _dateFin = DateTime.now();
+  DateTime _dateDebut = DateTime.now();
   void _Ajouter() {
     FirebaseFirestore.instance.collection('Tache').add({
       'categorie': tacheCategorie,
@@ -68,16 +76,16 @@ class _PageAjoutState extends State<PageAjout> {
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 25,
-                vertical: 5,
+                vertical: 1,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 15,
+                    height: 5,
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 10,
                   ),
                   label('Libellé'),
                   SizedBox(height: 15),
@@ -147,7 +155,23 @@ class _PageAjoutState extends State<PageAjout> {
                   SizedBox(
                     height: 50,
                   ),
-                  buton(onTap: _Ajouter)
+                  SizedBox(height: 15),
+                  label('Date début'),
+                  SizedBox(height: 15),
+                  ChampDeTexte(
+                    hintText: DateFormat('dd/MM/yyyy').format(_dateDebut),
+                    controlleur: _dateDebutControl,
+                  ),
+                  SizedBox(height: 15),
+                  label('Date fin'),
+                  SizedBox(height: 15),
+                  ChampDeTexte(
+                    hintText: DateFormat('dd/MM/yyyy').format(_dateFin),
+                    controlleur: _dateFinControl,
+                  ),
+                  SizedBox(height: 15),
+                  buton(onTap: _Ajouter),
+                  SizedBox(height: 15),
                 ],
               ),
             )
