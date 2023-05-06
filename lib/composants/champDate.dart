@@ -12,21 +12,26 @@ class champDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
+    return Container(
+      height: 55,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: TextFormField(
         controller: dateControlleur,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+        ),
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blueGrey),
-          ),
-          fillColor: Colors.white,
-          filled: true,
+          border: InputBorder.none,
           hintText: hintText,
-          helperStyle: TextStyle(color: Colors.grey[500]),
+          hintStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 17,
+          ),
         ),
         readOnly: true,
         onTap: () async {

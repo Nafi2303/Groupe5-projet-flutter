@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:tp2/composants/button.dart';
 import 'package:tp2/composants/champDate.dart';
 import 'package:tp2/composants/chipBox.dart';
-import 'package:tp2/composants/datePicker.dart';
 import 'package:tp2/composants/label.dart';
 import 'package:tp2/composants/textfield.dart';
 import 'package:tp2/composants/texteArea.dart';
