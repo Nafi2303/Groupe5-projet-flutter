@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tp2/composants/button.dart';
+import 'package:tp2/composants/champDate.dart';
 import 'package:tp2/composants/chipBox.dart';
 import 'package:tp2/composants/datePicker.dart';
 import 'package:tp2/composants/label.dart';
@@ -26,10 +27,12 @@ class _PageAjoutState extends State<PageAjout> {
   DateTime _selectedDate = DateTime.now();
   String tachePriorite = "";
   String tacheCategorie = "";
-  DateTime _dateFin = DateTime.now();
-  DateTime _dateDebut = DateTime.now();
+  final _dateFin = TextEditingController();
+  final _dateDebut = TextEditingController();
   void _Ajouter() {
     FirebaseFirestore.instance.collection('Tache').add({
+      'date_fin': _dateFinControl.text,
+      'date_debut': _dateDebutControl.text,
       'categorie': tacheCategorie,
       'description': _descriptionControlleur.text,
       'libelle': _libelleControlleur.text,
@@ -158,16 +161,16 @@ class _PageAjoutState extends State<PageAjout> {
                   SizedBox(height: 15),
                   label('Date début'),
                   SizedBox(height: 15),
-                  ChampDeTexte(
-                    hintText: DateFormat('dd/MM/yyyy').format(_dateDebut),
-                    controlleur: _dateDebutControl,
+                  champDate(
+                    hintText: 'dd/mm/yyyy',
+                    dateControlleur: _dateDebutControl,
                   ),
                   SizedBox(height: 15),
                   label('Date fin'),
                   SizedBox(height: 15),
-                  ChampDeTexte(
-                    hintText: DateFormat('dd/MM/yyyy').format(_dateFin),
-                    controlleur: _dateFinControl,
+                  champDate(
+                    hintText: 'dd/mm/yyyy',
+                    dateControlleur: _dateFinControl,
                   ),
                   SizedBox(height: 15),
                   buton(onTap: _Ajouter),

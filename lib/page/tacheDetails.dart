@@ -8,6 +8,8 @@ import 'package:tp2/composants/label.dart';
 import 'package:tp2/composants/textfield.dart';
 import 'package:tp2/composants/texteArea.dart';
 
+import '../composants/champDate.dart';
+
 class TacheDetails extends StatefulWidget {
   final Map<String, dynamic> tache;
   final String id;
@@ -21,6 +23,8 @@ class TacheDetails extends StatefulWidget {
 class _TacheDetails extends State<TacheDetails> {
   late TextEditingController _libelleControlleur;
   late TextEditingController _descriptionControlleur;
+  late TextEditingController _dateDebutControl;
+  late TextEditingController _dateFinControl;
   late String tachePriorite;
   late String tacheCategorie;
   bool modifier = false;
@@ -32,11 +36,16 @@ class _TacheDetails extends State<TacheDetails> {
         TextEditingController(text: widget.tache['description']);
     tachePriorite = widget.tache['priorite'];
     tacheCategorie = widget.tache['categorie'];
+    _dateFinControl = TextEditingController(text: widget.tache['date_fin']);
+    _dateDebutControl = TextEditingController(text: widget.tache['date_debut']);
+
     super.initState();
   }
 
   void _Modifier() {
     FirebaseFirestore.instance.collection('Tache').doc(widget.id).update({
+      'date_fin': _dateFinControl.text,
+      'date_debut': _dateDebutControl.text,
       'categorie': tacheCategorie,
       'description': _descriptionControlleur.text,
       'libelle': _libelleControlleur.text,
@@ -195,6 +204,20 @@ class _TacheDetails extends State<TacheDetails> {
                   SizedBox(
                     height: 50,
                   ),
+                  label('Date début'),
+                  SizedBox(height: 15),
+                  champDate(
+                    hintText: 'dd/mm/yyyy',
+                    dateControlleur: _dateDebutControl,
+                  ),
+                  SizedBox(height: 15),
+                  label('Date fin'),
+                  SizedBox(height: 15),
+                  champDate(
+                    hintText: 'dd/mm/yyyy',
+                    dateControlleur: _dateFinControl,
+                  ),
+                  SizedBox(height: 15),
                   modifier ? butonUpdate(onTap: _Modifier) : Container()
                 ],
               ),
