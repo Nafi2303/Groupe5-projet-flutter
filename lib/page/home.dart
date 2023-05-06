@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: CardTache(
                     libelleTache: tache['libelle'],
-                    heure: '14h00',
+                    heure: '',
                     icon: icon,
                     couleurIcon: Colors.white,
                     bgIcon: couleurIcon,
