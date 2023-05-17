@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "416176370100",
+    "project_id": "gest-taches-d1e4d",
+    "storage_bucket": "gest-taches-d1e4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416176370100:android:79f42ff0e13ad383b4c2e1",
+        "android_client_info": {
+          "package_name": "com.example.gest_taches_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416176370100-g59va40iu9etvf19o5onq5f1gs5mrubn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-1SOV6ikLv1rzFBSC9LfRfNHFHwogQ94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416176370100-g59va40iu9etvf19o5onq5f1gs5mrubn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416176370100-asvpv0rnmrfo51dmi1khj70u7p1n8n0r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tp2.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416176370100:android:40180f08a2a29728b4c2e1",
+        "android_client_info": {
+          "package_name": "com.example.tp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416176370100-g59va40iu9etvf19o5onq5f1gs5mrubn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-1SOV6ikLv1rzFBSC9LfRfNHFHwogQ94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416176370100-g59va40iu9etvf19o5onq5f1gs5mrubn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416176370100-asvpv0rnmrfo51dmi1khj70u7p1n8n0r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tp2.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416176370100:android:66faa10fc2a8fb74b4c2e1",
+        "android_client_info": {
+          "package_name": "dev.herbilot_tahina.tp2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416176370100-g59va40iu9etvf19o5onq5f1gs5mrubn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-1SOV6ikLv1rzFBSC9LfRfNHFHwogQ94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416176370100-g59va40iu9etvf19o5onq5f1gs5mrubn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416176370100-asvpv0rnmrfo51dmi1khj70u7p1n8n0r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tp2.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

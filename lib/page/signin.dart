@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 50,
             ),
             Text(
               "Continuer avec",
@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
                 Center(child: Bouton(imagePath: 'lib/images/search.png')),
               ],
             ),
-            SizedBox(height: 100),
+            SizedBox(height: 50),
             champDeSaisie(
               hintText: 'Nom d\'utilisateur',
               controlleur: utilisateurControlleur,

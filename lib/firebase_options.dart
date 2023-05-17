@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDnKwPZesGAD_GjPMdkpOHQkIXOfBc1Drs',
-    appId: '1:52620996606:android:02555cded42637a7089aaf',
-    messagingSenderId: '52620996606',
-    projectId: 'tp2-gestion-de-taches-f3a5e',
-    storageBucket: 'tp2-gestion-de-taches-f3a5e.appspot.com',
+    apiKey: 'AIzaSyC-1SOV6ikLv1rzFBSC9LfRfNHFHwogQ94',
+    appId: '1:416176370100:android:66faa10fc2a8fb74b4c2e1',
+    messagingSenderId: '416176370100',
+    projectId: 'gest-taches-d1e4d',
+    storageBucket: 'gest-taches-d1e4d.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDHvMniIJWhprLmdUokeECM0nMOpr0GOP4',
-    appId: '1:52620996606:ios:7514263f663fcaff089aaf',
-    messagingSenderId: '52620996606',
-    projectId: 'tp2-gestion-de-taches-f3a5e',
-    storageBucket: 'tp2-gestion-de-taches-f3a5e.appspot.com',
-    iosClientId: '52620996606-32t80etoi8p443pqk4b2v2ubtg0hdoeu.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBObW8PM36mLdiNdqba5O72xIXm5DOKneI',
+    appId: '1:416176370100:ios:bf47009931a45a0eb4c2e1',
+    messagingSenderId: '416176370100',
+    projectId: 'gest-taches-d1e4d',
+    storageBucket: 'gest-taches-d1e4d.appspot.com',
+    iosClientId: '416176370100-miile24c8cvr920r2lv4t6ejmbs3bika.apps.googleusercontent.com',
     iosBundleId: 'com.example.tp2',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDHvMniIJWhprLmdUokeECM0nMOpr0GOP4',
-    appId: '1:52620996606:ios:40bb0fc56fbeb174089aaf',
-    messagingSenderId: '52620996606',
-    projectId: 'tp2-gestion-de-taches-f3a5e',
-    storageBucket: 'tp2-gestion-de-taches-f3a5e.appspot.com',
-    iosClientId: '52620996606-8jvvh92tau2oet0mvnp7h54u5uqh9p0v.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBObW8PM36mLdiNdqba5O72xIXm5DOKneI',
+    appId: '1:416176370100:ios:4ef45b3d01e903d5b4c2e1',
+    messagingSenderId: '416176370100',
+    projectId: 'gest-taches-d1e4d',
+    storageBucket: 'gest-taches-d1e4d.appspot.com',
+    iosClientId: '416176370100-asvpv0rnmrfo51dmi1khj70u7p1n8n0r.apps.googleusercontent.com',
     iosBundleId: 'com.example.tp2.RunnerTests',
   );
 }
